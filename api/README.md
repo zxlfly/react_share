@@ -99,7 +99,7 @@ React16.8开始引⼊了hooks，函数组件也可以拥有状态。返回渲染
 ```setState(partialState, callback)```
 1. ``partialState : object|function``用于产生与当前state合并的子集
 2. ``callback : function``state更新之后被调用
-3. **不要直接谢盖state**
+3. **不要直接修改state**
 4. 出于性能考虑react可能会把多个setState调用合并成一个，所以state的更新可能是异步的
    1. 如果需要获取最新的值，可以回调中获取
 5. 使用定时器或者在原生事件中修改状态是同步的，不会批量处理，只有在react的合成事件中才会批量处理
