@@ -110,3 +110,56 @@ React16.8开始引⼊了hooks，函数组件也可以拥有状态。返回渲染
 
 # 组建复合
 可以理解成布局，讲通用的页面布局整合在一起，通过传入的props控制渲染结果，可以自定义外观和行为。对于组件之间公用的非逻辑UI，将他们抽离整合可以有效的复用，易于修改调试
+
+# redux
+redux是一种状态容器，提供了可预测的状态管理，保证程序行为的一致性。（不是针对react设计，其他的框架也能使用）
+**安装**
+``npm install redux --save``
+1. 需要一个store存储数据
+2. store里的reducer初始化state并且定义修改规则
+3. 通过dispatch派发action来提交对数据的修改
+4. action提交到reducer函数里，根据传入的action的type（可以传参payload），返回新值
+
+# react-redux
+在实际的项目我们一般不单独使用redux，而是结合react-redux使用，简化我们的操作
+``npm install --save react-router-dom``
+react-redux提供了两个api
+- Provider为后代组件提供store
+- connect为组件提供数据和变更方法
+例：``ReactReduxPage``
+
+# react-router
+react-router包含3个库，``react-router``、``react-router-dom``和``react-router-native``。``react-router``提供最基本的路由功能。后面两个都依赖``react-router``，所以安装的时候我们可以直接安装``react-router-dom``或``react-router-native``。前者是web中使用的，后者是react native中使用的。我们这介绍的是``react-router-dom``  
+``npm install --save react-router-dom``
+**基本使用**
+react-router中奉行一切皆组件的思想，路由器Router、链接Link、路由Route、独占路由Switch、重定向Redirect都是以组件的形式存在  
+例：``RouterPage``
+路由Route渲染内容的三种方式：
+- children：func
+  - 不管location是否匹配，都会渲染，其他工作方式和render一样
+- render：func
+  - 一个函数，当location匹配的时候回调用渲染
+- component: component
+  - 只有当location匹配的时候渲染对应的组件
+- 当所有的location都不匹配的时候渲染一个404页面
+
+# 生命周期
+⽣命周期⽅法，⽤于在组件不同阶段执⾏⾃定义功能。  
+react 16.4开始下面生命周期不再推荐使用，因为引入Fiber任务调度。render之前的所有生命周期都有可能被多次执行。
+- componentWillMount
+- componentWillReceiveProps
+- componentWillUpdate
+引入了两个新的生命周期
+- static getDerivedStateFromProps
+  - ``static getDerivedStateFromProps(props, state)``
+  - ``getDerivedStateFromProps``会在调用render之前调用，并且初始挂载以及后续更新时都会被调用。
+  - 它可以返回一个对象来更新state
+  - 如果返回null则不更新任何内容
+- getSnapshotBeforeUpdate
+  - ``getSnapshotBeforeUpdate(prevProps, prevState)``
+  - ``getSnapshotBeforeUpdate``在最近一次渲染输出到DODM之前调用
+  - 能在组件发生DOM更改之前捕获一些信息，例如滚动位置
+  - 可以返回任何值，作为参数传递给``componentDidUpdate(prevProps, prevState, snapshot)``
+
+# PropTypes
+props类型检查，具体的可以去官网查看[文档](https://zh-hans.reactjs.org/docs/typechecking-with-proptypes.html#gatsby-focus-wrapper)
