@@ -6,6 +6,9 @@ import ReduxPage from './pages/ReduxPage.jsx'
 import ReactReduxPage from './pages/ReactReduxPage.jsx'
 import store from './store/ReduxStore'
 import RouterPage from './pages/RouterPage'
+import HookPage from './pages/HookPage'
+import UseMemoPage from './pages/UseMemoPage'
+import UseCallbackPage from './pages/UseCallbackPage'
 function App() {
   return (
     <div className="App">
@@ -21,6 +24,12 @@ function App() {
         </Provider>
         <hr/>
         <RouterPage />
+        <hr/>
+        <HookPage />
+        <hr/>
+        <UseMemoPage />
+        <hr/>
+        <UseCallbackPage />
     </div>
   );
 }
