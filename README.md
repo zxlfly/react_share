@@ -3,4 +3,5 @@
 
 # app
 组件化，redux，react-redux，router实现解析  
-myReact实现一个简版的react
+# my-react
+实现一个简版的react
