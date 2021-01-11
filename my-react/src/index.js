@@ -11,7 +11,7 @@ class ClassComponent extends React.Component {
     return (
       <div className="border">
         <h3>ClassComponent</h3>
-        <p className={this.props.color}>{this.props.name}</p>
+        <p className={this.props.color}>color</p>
       </div>
     );
   }
@@ -31,6 +31,9 @@ const jsx = (
     </div>
     <FunctionComponent />
     <ClassComponent />
+    <>
+    <p>Fragment</p>
+    </>
   </div>
 )
 ReactDOM.render(jsx, document.getElementById("root"));

@@ -7,7 +7,7 @@ import React from 'react';
  * 
  * Context.Provider
  * 这个就是传递属性的api，接受一个value属性，即传递给消费组件的值，
- * 允许先飞组件订阅context的变化
+ * 允许消费组件订阅context的变化
  * Provider可以包含多个消费组件，可以嵌套（有相同属性，里层覆盖外层），
  * value属性发生变化时，内部的所有消费组件都会重新渲染。
  * provider及其内部consumer组件都不受制于shouldComponentUpdate函数
