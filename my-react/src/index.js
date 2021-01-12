@@ -1,7 +1,11 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import React from './myReact/step1/index';
-import ReactDOM from './myReact/step1/react-dom';
+// import React from './myReact/step1/index';
+// import ReactDOM from './myReact/step1/react-dom';
+// import React from './myReact/step2/index';
+// import ReactDOM from './myReact/step2/react-dom';
+import React from './myReact/step2/index';
+import ReactDOM from './myReact/step2/react-dom';
 import './index.css';
 class ClassComponent extends React.Component {
   static defaultProps = {

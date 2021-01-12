@@ -2,6 +2,8 @@
 let nextUnitOfWork=null
 // 当前执行的任务（父节点）
 let workInProgress = null
+// 当前进行中的fiber
+let wipFiber = null
 // fiber结构
 /**
  * type 类型
@@ -33,11 +35,11 @@ function render(vnode,container){
 function createNode(fiber){
     let node
     const {type,props}=fiber
-    if(type=='TEXT'){
+    if(type==='TEXT'){
         node=document.createTextNode("")
-    }else if(typeof type =='string'){
+    }else if(typeof type ==='string'){
         node = document.createElement(type)
-    }else if(typeof type =='function'){
+    }else if(typeof type ==='function'){
         node = type.prototype.isReactComponent
         ?updateClassComponent(fiber)
         :updateFunctionComponent(fiber)

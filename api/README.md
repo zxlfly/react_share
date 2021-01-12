@@ -122,7 +122,7 @@ redux是一种状态容器，提供了可预测的状态管理，保证程序行
 
 # react-redux
 在实际的项目我们一般不单独使用redux，而是结合react-redux使用，简化我们的操作
-``npm install --save react-router-dom``
+``npm install --save react-redux``
 react-redux提供了两个api
 - Provider为后代组件提供store
 - connect为组件提供数据和变更方法
