@@ -2,7 +2,7 @@
 import React, { useEffect} from "react";
 // import Form, {Field} from "rc-field-form";
 import Form, {Field} from "../components/my-rc-field-form/";
-import Input from "../components/input";
+import Input from "../components/Input";
 
 const nameRules = {required: true, message: "请输入姓名！"};
 const passworRules = {required: true, message: "请输入密码！"};

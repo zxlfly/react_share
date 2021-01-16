@@ -1,7 +1,7 @@
 // 下一个任务
 let nextUnitOfWork=null
 // 当前执行的任务（父节点）
-let workInProgress = null
+let wipRoot = null
 // fiber结构
 /**
  * type 类型
@@ -21,13 +21,13 @@ function render(vnode,container){
     // const node = createNode(vnode)
     // // 2.更新dom
     // container.appendChild(node)
-    workInProgress ={
+    wipRoot ={
         stateNode : container,
         props:{
             children:[vnode]
         }
     }
-    nextUnitOfWork = workInProgress
+    nextUnitOfWork = wipRoot
 }
 // 创建真是的dom节点
 function createNode(fiber){
@@ -37,14 +37,15 @@ function createNode(fiber){
         node=document.createTextNode("")
     }else if(typeof type =='string'){
         node = document.createElement(type)
-    }else if(typeof type =='function'){
-        node = type.prototype.isReactComponent
-        ?updateClassComponent(fiber)
-        :updateFunctionComponent(fiber)
-    }else{
-        // 源码中没有这么做，是直接协调的子节点
-        node =document.createDocumentFragment()
     }
+    // else if(typeof type =='function'){
+    //     node = type.prototype.isReactComponent
+    //     ?updateClassComponent(fiber)
+    //     :updateFunctionComponent(fiber)
+    // }else{
+    //     // 源码中没有这么做，是直接协调的子节点
+    //     node =document.createDocumentFragment()
+    // }
     // 处理子节点
     // reconcileChildren(props.children,node)
     // 属性处理
@@ -82,9 +83,9 @@ function reconcileChildren(work,children){
     }
 }
 function commitRoot(){
-    commitWorker(workInProgress.child);
-    console.log(workInProgress);
-    workInProgress = null;
+    commitWorker(wipRoot.child);
+    console.log(wipRoot);
+    wipRoot = null;
 }
 function commitWorker(fiber){
     if(!fiber){
@@ -158,7 +159,7 @@ function workLoop(idledeadline){
         nextUnitOfWork = perforunitOfWork(nextUnitOfWork)
     }
     // 判断是否还有任务待执行，是否有父节点
-    if(!nextUnitOfWork&&workInProgress){
+    if(!nextUnitOfWork&&wipRoot){
         // 提交更新
         commitRoot()
     }

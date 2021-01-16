@@ -49,7 +49,7 @@ class FormStore {
   };
 
   getFiledsValue = () => {
-    return {...this.store};
+    return this.store
   };
 
   // 校验

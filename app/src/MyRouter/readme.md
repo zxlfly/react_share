@@ -15,8 +15,7 @@ children和render是函数
 区别在于children不管location是否匹配，都会渲染，其他一样  
 
 component顾名思义组件的形式，只在当location匹配的时候渲染。  
-component渲染的时候调用的React.createElementruguo使用匿名函数的形式调用，每次都会是一个新的的匿名组件，导致生成的type总是不相同，这个时候会产生重复的卸载和挂载。因此，当⽤用到内联函数的内联渲染
-时，请使⽤用render或者children。
+component渲染的时候调用的React.createElement如果使用匿名函数的形式调用，每次都会是一个新的的匿名组件，导致生成的type总是不相同，这个时候会产生重复的卸载和挂载。因此，当⽤用到内联函数的内联渲染时，请使⽤用render或者children。
 
 ##  动态路由
 使⽤用:id的形式定义动态路路由  
@@ -49,12 +48,12 @@ Context.js-->跨层级数据传递
 Router.js-->最顶层，作用就是传递通用的属性信息
 
 BrowserRouter.js-->将history传递给Router  
-<BrowserRouter> 使⽤用 HTML5 提供的 history API ( pushState ,  replaceState 和  popstate 事
+<BrowserRouter> 使⽤ HTML5 提供的 history API ( pushState ,  replaceState 和  popstate 事
 件) 来保持 UI 和 URL 的同步
 <HashRouter> 使⽤用 URL 的  hash 部分（即  window.location.hash ）来保持 UI 和 URL 的同步。
 basename: string  
-所有URL的base值。如果你的应⽤用程序部署在服务器器的⼦子⽬目录，则需要将其设置为⼦子⽬目录。 basename  
-的格式是前⾯面有⼀个/，尾部没有/。
+所有URL的base值。如果你的应用程序部署在服务器的子⽬录，则需要将其设置为⼦目录。 basename  
+的格式是前⾯有⼀个/，尾部没有/。
 
 Link.js-->跳转的组件，本质是一个a标签  
 Route.js-->匹配path值渲染对应的组件  

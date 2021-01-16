@@ -4,7 +4,7 @@ import React from 'react';
 // 高阶组件
 // import HocPage from './Hoc/index'
 //自定义组件
-// import MyRCFieldForm from './pages/MyRCFieldForm'
+import MyRCFieldForm from './pages/MyRCFieldForm'
 // import ReduxPage from './redux/step1/ReduxStep1Page'
 // import ReduxPage from './redux/step2/ReduxStep2Page'
 // import ReduxPage from './redux/step3/ReduxStep3Page'
@@ -13,7 +13,7 @@ import React from 'react';
 // import MyReactReduxHookPage from './pages/MyReactReduxHookPage'
 // import MyReactReduxPage from './pages/MyReactReduxPage'
 // import RouterPage from './pages/RouterPage'
-import MyRouterPage from './pages/MyRouterPage'
+// import MyRouterPage from './pages/MyRouterPage'
 
 import './App.css';
 
@@ -22,14 +22,14 @@ function App() {
     <div className="App">
       {/* <ComponentPassValue />
       <HocPage /> */}
-      {/* <MyRCFieldForm /> */}
+      <MyRCFieldForm />
       {/* <ReduxPage /> */}
       {/* <HooksApiPage /> */}
       {/* <ReactReduxPage /> */}
       {/* <MyReactReduxPage /> */}
       {/* <MyReactReduxHookPage /> */}
       {/* <RouterPage /> */}
-      <MyRouterPage />
+      {/* <MyRouterPage /> */}
     </div>
   );
 }

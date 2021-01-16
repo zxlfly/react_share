@@ -4,7 +4,7 @@
 // 类组件就是对应的类名
 // 文本节点这里特殊处理了，定义成了TEXT，内容放到了props.children的nodeValue上，后续当做属性处理。源码中不是这样的
 function createElement(type,config,...children){
-    console.log(type);
+    // console.log(type);
     // 清除没用的属性方便调试
     if(config){
         delete config._self
