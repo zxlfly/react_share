@@ -5,3 +5,6 @@
 组件化，redux，react-redux，router实现解析  
 # my-react
 实现一个简版的react
+
+# advanced
+路由守卫,Generator,redux-saga
