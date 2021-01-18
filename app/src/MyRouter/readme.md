@@ -1,4 +1,4 @@
-##  react-router
+##  [react-router](http://react-router.docschina.org/)
 包含三个库，react-router、react-router-dom和react-router-native。  
 react-router提供最基本的路由功能，实际使用我们不会直接安装react-router。而是根据运行环境安装后面两种，他们依赖react-router。安装时会自动安装react-router。react-router-dom用于浏览器端，react-router-nativ用于rn中
 
