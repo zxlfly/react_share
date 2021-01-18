@@ -154,7 +154,7 @@ function perforunitOfWork(fiber){
 }
 function workLoop(idledeadline){
     // 当前有需要更新的fiber，并且浏览器有空闲时间
-    if(nextUnitOfWork&&idledeadline.timeRemaining()>1){
+    while(nextUnitOfWork&&idledeadline.timeRemaining()>1){
         // 执行任务
         nextUnitOfWork = perforunitOfWork(nextUnitOfWork)
     }

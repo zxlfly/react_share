@@ -5,6 +5,7 @@
 // import React from './myReact/step2/index';
 // import ReactDOM from './myReact/step2/react-dom';
 import React from './myReact/step3/index';
+// import ReactDOM,{useState} from './myReact/step3/react-dom-copy';
 import ReactDOM,{useState} from './myReact/step3/react-dom';
 import './index.css';
 class ClassComponent extends React.Component {
@@ -29,16 +30,18 @@ function FunctionComponent(props) {
       <div>{count}</div>
       {/* 需要处理事件 */}
       <button onClick={()=>setCount(count+1)}>add</button>
+      {count % 2 ? <button>omg</button> : <span>omg</span>}
     </div>
   );
 }
+
 const jsx = (
   <div>
-    <div>
+    {/* <div>
       <p>手写react</p>
-    </div>
+    </div> */}
     <FunctionComponent />
-    <ClassComponent />
+    {/* <ClassComponent /> */}
     {/* <>
     <p>Fragment</p>
     </> */}
