@@ -25,3 +25,11 @@ console.log(hw.next());
 
 ## 路由守卫-PrivateRoute
 思路：创建高阶组件包装Route使其具有权限判断功能
+
+
+## redux-saga
+- **effects**是一个js对象，里面包含描述副作用的信息，通过yield传达给sagaMiddleware执行。为了保证代码的易测性，所有的yield后面只能跟effect
+- **put**作用和redux中的dispatch相同``yield put({ type: LOGIN_SUCCESS)``
+- **call**与**fork**：阻塞与无阻塞调用
+- **take**等待redux dispatch匹配某个pattern的action
+- **takeEvery**``takeEvery(pattern, saga, ...args)``可以让多个saga任务被**fork**执行
