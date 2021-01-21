@@ -7,6 +7,11 @@ export default {
         current: 1,
         total: 0
     },
+    subscriptions: {
+        setup({ dispatch, history }) {
+          console.log('products load');
+        },
+    },
     reducers: {
         productData(state, action) {
             return { ...state, data: action.payload.data };

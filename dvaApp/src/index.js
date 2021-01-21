@@ -1,8 +1,9 @@
-import dva from 'dva';
+// import dva from 'dva';
+import app from "./app"
 import './index.css';
 
 // 1. Initialize
-const app = dva();
+// const app = dva();
 // const app = dva({
 //     initialState: {
 //         products: [
@@ -16,6 +17,7 @@ const app = dva();
 
 // 3. Model
 app.model(require('./models/products').default);
+// app.model(require('./models/user').default);
 
 // 4. Router
 app.router(require('./router').default);

@@ -47,3 +47,20 @@ Warning: Please use `require("history").createHashHistory` instead of `require("
 - 打开node_modules/dva/lib/index/js：
 - 找到(22行)``var _createHashHistory =_interopRequireDefault(require("history/createHashHistory"));``
 - 改成：``var _createHashHistory =_interopRequireDefault(require("history").createHashHistory);``
+
+## dynamic
+如果有多个model，都在入口页面加载，项目大了model多了可能会影响速度，很多model初始化就加载，只需要在对应模块组件页面加载的时候一起加载就可以了。dynamic就可以处理这个问题。
+- 首先需要把入口的app单独抽离出来
+  - 本示例中为``app.js``
+  - 然后原来的入口页面直接导入即可。不需要默认的初始化了
+- 新增dynamic文件夹
+  - 新增对应的动态加载的模块
+  - 本示例中为``UserPage``
+  - 接受三个参数
+    - 抽离的app实例
+    - 关联的models可以有多个
+    - 对应的component
+  - 最后导出
+- 修改路由配置
+  - 原来是默认直接导入配置
+  - 现在需要替换为生面导出的dynamic组件

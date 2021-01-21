@@ -9,6 +9,8 @@ function IndexPage() {
       <h1 className={styles.title}>Yay! Welcome to dva!</h1>
       <div className={styles.welcome} />
       <Link to="products">products</Link>
+      <hr/>
+      <Link to="user">user</Link>
     </div>
   );
 }
