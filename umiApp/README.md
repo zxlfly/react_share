@@ -26,6 +26,7 @@
 - ``wrappers``string[]类型
   - 配置路由的高阶组件封装
   - 可以用来做权限控制
+- 路由可以嵌套
 ```
 export default {
   routes: [
