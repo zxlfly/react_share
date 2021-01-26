@@ -26,27 +26,74 @@
 - ``wrappers``string[]类型
   - 配置路由的高阶组件封装
   - 可以用来做权限控制
-- 路由可以嵌套
-```
-export default {
-  routes: [
-    { path: '/user', component: 'user',
-      wrappers: [
-        '@/wrappers/auth',
-      ],
-    },
-    { path: '/login', component: 'login' },
-  ]
-}
-
-
-import { Redirect } from 'umi'
-export default (props) => {
-  const { isLogin } = useAuth();
-  if (isLogin) {
-    return <div>{ props.children }</div>;
-  } else {
-    return <Redirect to="/login" />;
+  ```
+  export default {
+    routes: [
+      { path: '/user', component: 'user',
+        wrappers: [
+          '@/wrappers/auth',
+        ],
+      },
+      { path: '/login', component: 'login' },
+    ]
   }
-}
+
+
+  import { Redirect } from 'umi'
+  export default (props) => {
+    const { isLogin } = useAuth();
+    if (isLogin) {
+      return <div>{ props.children }</div>;
+    } else {
+      return <Redirect to="/login" />;
+    }
+  }
+  ```
+- 路由可以嵌套
+- 路由组件参数，可通过props获取
+  - ``match``当前路由和url match后的对象，包含``params``、 ``path``、``url``和``isExact``属性
+  - ``location``表示当前处于哪个位置，包含``pathname``、``search``、``query``等属性
+  - ``history``同api
+  - ``route``当前路由配置，包含``path``、``exact``、``component``、``routes``等
+  - ``routes``全部路由信息
+- 传递参数给子路由
+  - 通过cloneElement
+  ```
+  import React from 'react';
+  export default function Layout(props) {
+    return React.Children.map(props.children, child => {
+      return React.cloneElement(child, { foo: 'bar' });
+    });
+  }
+  ```
+
+#### 约定式路由
+除了配置式路由外，也支持约定式路由。不需要手写配置，通过目录和文件及其命名分析出路由配置。  
+在没有routes配置时，会进入约定式路由模式。  
+该模式下匹配有相应的规则，详情可查看文档。
+
+#### 动态路由
+约定``[]``包裹的文件或者文件夹为动态路由。  
+例如：
+- ``src/pages/users/[id].tsx`` 会成为 ``/users/:id``
+- ``src/pages/users/[id]/settings.tsx`` 会成为 ``/users/:id/settings``
+
+#### 动态可选路由
+约定``[ $]``包裹的文件或者文件夹为动态路由。  
+例如：
+- ``src/pages/users/[id$].tsx`` 会成为 ``/users/:id?``
+- ``src/pages/users/[id$]/settings.tsx`` 会成为 ``/users/:id?/settings``
+
+#### 扩展路由属性
+支持在代码层通过导出静态属性的方式扩展路由。
+例如：
 ```
+function HomePage() {
+  return <h1>Home Page</h1>;
+}
+HomePage.title = 'Home Page';
+export default HomePage;
+```
+其中的``title``会附加到路由配置中。
+
+## 运行时配置
