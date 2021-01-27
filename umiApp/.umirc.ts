@@ -6,9 +6,12 @@ export default defineConfig({
   },
   routes: [
     { 
-      path: '/', component: '@/pages/index/index'
-    },{ 
-      path: '/more', component: '@/pages/more/more'
+      path: '/', component: '@/pages/index/index',
+      routes:[
+        { 
+          path: '/more', component: '@/pages/more/more'
+        }
+      ]
     },{ 
       path: '/product/:id', component: '@/pages/product/[id]'
     },{ 

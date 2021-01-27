@@ -96,4 +96,76 @@ export default HomePage;
 ```
 其中的``title``会附加到路由配置中。
 
-## 运行时配置
+#### 嵌套路由
+通常可以把公共布局ui抽离成layout页面，子路由为内容部分
+```
+export default {
+  routes: [
+    { path: '/login', component: 'login' },
+    {
+      path: '/',
+      component: '@/layouts/index',
+      routes: [
+        { path: '/list', component: 'list' },
+        { path: '/admin', component: 'admin' },
+      ],
+    }, 
+  ],
+}
+```
+以上面的了代码为例，我们还可以在layout页面做一些控制，例如渲染不用的需要，根据权限判断时候可以展示内容等。
+#### 页面跳转
+```
+import { Link } from 'umi';
+export default () => (
+  <div>
+    <Link to="/users">Users Page</Link>
+  </div>
+);
+```
+```
+import { history } from 'umi';
+// 跳转到指定路由
+history.push('/list');
+// 带参数跳转到指定路由
+history.push('/list?a=b');
+history.push({
+  pathname: '/list',
+  query: {
+    a: 'b',
+  },
+});
+// 跳转到上一个路由
+history.goBack();
+```
+
+## [运行时配置](https://umijs.org/zh-CN/docs/runtime-config)
+约定 ``src/app.tsx`` 为运行时配置。  
+可以修改路由等等。
+
+## 按需加载
+封装一个异步组件  
+```
+import { dynamic } from 'umi';
+export default dynamic({
+  loader: async function() {
+    // 这里的注释 webpackChunkName 可以指导 webpack 将该组件 HugeA 以这个名字单独拆出去
+    const { default: HugeA } = await import(/* webpackChunkName: "external_A" */ './HugeA');
+    return HugeA;
+  },
+});
+```
+使用异步组件
+```
+import React from 'react';
+import AsyncHugeA from './AsyncHugeA';
+// 像使用普通组件一样即可
+// dynamic 为你做:
+// 1. 异步加载该模块的 bundle
+// 2. 加载期间 显示 loading（可定制）
+// 3. 异步组件加载完毕后，显示异步组件
+export default () => {
+  return <AsyncHugeA />;
+}
+
+```
