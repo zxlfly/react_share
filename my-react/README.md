@@ -27,3 +27,6 @@ react/packages/scheduler/src/forks/SchedulerHostConfig.default.js。
 ### step3 实现useState（16.8新增特性）
 useState在updateFunctionComponent的时候存到fiber中  
 即当前进行中的fiber**wipFiber**
+
+### [react核心代码解析](https://www.processon.com/view/link/601fabe67d9c0816c3e3fa62)
+以上面的代码为基础深入了解源码
