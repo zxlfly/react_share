@@ -1,0 +1,3 @@
+class组件中state是一种数据结构，在当前组件有效，使用setState进行更改，会引发组件渲染。  
+函数组件中可以使用useState、useReducer。  
+与class组件中的setState不同的是，如果前后两次的值相同，函数组件中的useState和useReducer Hook会放弃更新，不会导致重新渲染。
