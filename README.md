@@ -4,7 +4,8 @@
 # app
 组件化，redux，react-redux，router实现解析  
 # my-react
-实现一个简版的react
+实现一个简版的react  
+[react核心代码解析](https://www.processon.com/view/link/601fabe67d9c0816c3e3fa62)
 
 # advanced
 路由守卫,Generator,redux-saga
