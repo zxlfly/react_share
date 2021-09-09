@@ -17,7 +17,7 @@ let deletions = null;
  * child 第一个子节点
  * sibling 下一个兄弟节点
  * return 父节点
- * stateNode 真实dom节点
+ * stateNode 真实dom节点,函数组件，类组件，context等是没有的
  * effectTag 标识操作类型
  */
 // vnode--虚拟dom  container宿主原素
@@ -101,6 +101,10 @@ function updateClassComponent(fiber){
     // 然后协调子节点
     reconcileChildren(fiber,children)
 }
+function updateFragmentComponent(fiber){
+    let children = fiber.props.children
+    reconcileChildren(fiber,children)
+}
 // 原生节点
 function updateHostComponent(fiber){
     // 判断是否有stateNode是否存在，不存在就创建
@@ -170,7 +174,9 @@ function performUnitOfWork(fiber){
         type.prototype.isReactComponent
           ? updateClassComponent(fiber)
           : updateFunctionComponent(fiber);
-      } else {
+      } else if(type===undefined){
+        updateFragmentComponent(fiber)
+      }else if(typeof type === "string"){
         updateHostComponent(fiber);
     }
     // 返回下一个任务

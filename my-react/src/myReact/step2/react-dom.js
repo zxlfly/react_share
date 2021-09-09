@@ -11,12 +11,12 @@ let wipRoot = null
  * child 第一个子节点
  * sibling 下一个兄弟节点
  * return 父节点
- * stateNode 真实dom节点
+ * stateNode 真实dom节点，函数组件，类组件，context等是没有的
  * 
  */
 // vnode--虚拟dom  container宿主原素
 function render(vnode,container){
-    // // console.log(vnode);
+    console.log('vnode',vnode);
     // // 1.vnode转换成node
     // const node = createNode(vnode)
     // // 2.更新dom
@@ -129,6 +129,10 @@ function updateFunctionComponent(fiber){
     // 然后协调子节点
     reconcileChildren(fiber,children)
 }
+function updateFragmentComponent(fiber){
+    let children = fiber.props.children
+    reconcileChildren(fiber,children)
+}
 function perforunitOfWork(fiber){
     // 执行当前的任务，根据节点类型处理
     const {type} =fiber
@@ -137,7 +141,9 @@ function perforunitOfWork(fiber){
         type.prototype.isReactComponent
           ? updateClassComponent(fiber)
           : updateFunctionComponent(fiber);
-      } else {
+      } else if(type===undefined){
+        updateFragmentComponent(fiber)
+      }else if(typeof type === "string"){
         updateHostComponent(fiber);
     }
     // 返回下一个任务

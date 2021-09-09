@@ -37,14 +37,14 @@ function FunctionComponent(props) {
 
 const jsx = (
   <div>
-    {/* <div>
+    <div>
       <p>手写react</p>
-    </div> */}
+    </div>
     <FunctionComponent />
-    {/* <ClassComponent /> */}
-    {/* <>
+    <ClassComponent />
+    <>
     <p>Fragment</p>
-    </> */}
+    </>
   </div>
 )
 ReactDOM.render(jsx, document.getElementById("root"));
