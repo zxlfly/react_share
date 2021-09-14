@@ -87,6 +87,7 @@ function updateNode(node, prevVal, nextVal) {
 // 函数组件处理
 function updateFunctionComponent(fiber){
     wipFiber = fiber;
+    // 简化处理源码中是链表
     wipFiber.hooks = [];
     wipFiber.hookIndex = 0;
     const {type,props}=fiber
@@ -211,6 +212,7 @@ function commitRoot(){
     commitWorker(wipRoot.child);
     currentRoot = wipRoot
     wipRoot = null;
+    console.log('currentRoot',currentRoot);
 }
 function commitDeletios(fiber,parentNode){
     if (fiber.stateNode) {
@@ -262,6 +264,7 @@ export function useState(init){
     const setState=(action)=>{
         // 将操作入队列等待更新的时候重新执行useState
         hook.queue.push(action)
+        // 这里是简化操作 应该从当前函数组件的开始 而不是根
         wipRoot = {
             stateNode: currentRoot.stateNode,
             props: currentRoot.props,
