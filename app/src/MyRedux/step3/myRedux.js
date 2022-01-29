@@ -54,13 +54,13 @@ function applyMiddleware(...middlewares) {
         const middlewareAPI = {
             getState: store.getState,
             // 写成函数，避免不同中间件之间相互干扰
-            // dispatch只和当前作用于相关
-            dispatch: (action) => dispatch(action)
+            // dispatch只和当前作用域相关，使用的是依次增强过的
+            dispatch: (action,...args) => dispatch(action,...args)
         }
 
         const chain = middlewares.map(middleware => middleware(middlewareAPI));
-        dispatch = compose(...chain)(store.dispatch)
         // 增强dispatch
+        dispatch = compose(...chain)(store.dispatch)
         return {
             ...store,
             dispatch

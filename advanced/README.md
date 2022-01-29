@@ -30,6 +30,20 @@ console.log(hw.next());
 ## redux-saga
 - **effects**是一个js对象，里面包含描述副作用的信息，通过yield传达给sagaMiddleware执行。为了保证代码的易测性，所有的yield后面只能跟effect
 - **put**作用和redux中的dispatch相同``yield put({ type: LOGIN_SUCCESS})``
-- **call**与**fork**：阻塞与无阻塞调用
+- **call**与**fork**：redux-saga 可以⽤ fork 和 call 来调⽤⼦ saga;call阻塞与fork无阻塞调用
 - **take**等待redux dispatch匹配某个pattern的action
 - **takeEvery**``takeEvery(pattern, saga, ...args)``可以让多个saga任务被**fork**执行
+
+### 当有多个saga的时候，rootSaga.js
+```
+import {all} from "redux-saga/effects";
+import loginSaga from "./loginSaga";
+export default function* rootSaga(params) {
+ yield all([loginSaga()]);
+}
+```
+#### store/index.js中引⽤改成rootSaga即可：
+```
+...
+sagaMiddleware.run(rootSaga);
+```
