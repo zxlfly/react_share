@@ -28,5 +28,41 @@ react/packages/scheduler/src/forks/SchedulerHostConfig.default.js。
 useState在updateFunctionComponent的时候存到fiber中  
 即当前进行中的fiber**wipFiber**
 
+### 17.0.2
+基于17.0.2实现的mini版本
+#### 前置知识点
+- Performance.now()
+  - performance.now()方法返回一个精确到毫秒的  DOMHighResTimeStamp
+  - 和JavaScript中其他可用的时间类函数（比如Date.now）不同的是，window.performance.now()返回的时间戳没有被限制在一毫秒的精确度内，相反，它们以浮点数的形式表示时间，精度最高可达微秒级。
+  - 另外一个不同点是，window.performance.now()是以一个恒定的速率慢慢增加的，它不会受到系统时间的影响（系统时钟可能会被手动调整或被NTP等软件篡改）。另外，performance.timing.navigationStart + performance.now() 约等于 Date.now()。
+- MessageChannel
+  - Channel Messaging API的MessageChannel 接口允许我们创建一个新的消息通道，并通过它的两个MessagePort 属性发送数据。
+  - 属性
+    - MessageChannel.port1
+      - 返回channel的port1。
+    - MessageChannel.port2
+      - 返回channel的port2。
+  - 构造函数
+    - MessageChannel()
+    - 返回一个带有两个MessagePort属性的MessageChannel新对象
+```
+const t0 = window.performance.now();
+doSomething();
+const t1 = window.performance.now();
+console.log("doSomething函数执行了" + (t1 - t0) + "毫秒.")
+
+var channel = new MessageChannel();
+var para = document.querySelector('p');
+var ifr = document.querySelector('iframe');
+var otherWindow = ifr.contentWindow;
+ifr.addEventListener("load", iframeLoaded, false);
+function iframeLoaded() {
+  otherWindow.postMessage('Hello from the main page!', '*', [channel.port2]);
+}
+channel.port1.onmessage = handleMessage;
+function handleMessage(e) {
+  para.innerHTML = e.data;
+}   
+```
 ### [react核心代码解析](https://www.processon.com/view/link/601fabe67d9c0816c3e3fa62)
 以上面的代码为基础深入了解源码
