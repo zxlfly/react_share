@@ -57,7 +57,7 @@ function applyMiddleware(...middlewares) {
             // dispatch只和当前作用域相关，使用的是依次增强过的
             dispatch: (action,...args) => dispatch(action,...args)
         }
-
+        // 这里形成闭包
         const chain = middlewares.map(middleware => middleware(middlewareAPI));
         // 增强dispatch
         dispatch = compose(...chain)(store.dispatch)
