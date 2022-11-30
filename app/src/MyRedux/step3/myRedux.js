@@ -25,9 +25,9 @@ function createStore(reducer, enhancer) {
     function subscribe(listener) {
         currentListeners.push(listener)
         // 返回取消订阅的方法
-        return ()=>{
+        return () => {
             const index = currentListeners.indexOf(listener)
-            currentListeners.splice(index,1)
+            currentListeners.splice(index, 1)
         }
     }
     dispatch({ type: '__$$init' })
@@ -50,12 +50,12 @@ function compose(...funs) {
 function applyMiddleware(...middlewares) {
     return createStore => reducer => {
         const store = createStore(reducer)
-        let dispatch =store.dispatch
+        let dispatch = store.dispatch
         const middlewareAPI = {
             getState: store.getState,
             // 写成函数，避免不同中间件之间相互干扰
-            // dispatch只和当前作用域相关，使用的是依次增强过的
-            dispatch: (action,...args) => dispatch(action,...args)
+            // dispatch只和当前作用域相关，防止不同中间件相互干扰
+            dispatch: (action, ...args) => dispatch(action, ...args)
         }
         // 这里形成闭包
         const chain = middlewares.map(middleware => middleware(middlewareAPI));
@@ -67,18 +67,18 @@ function applyMiddleware(...middlewares) {
         }
     }
 }
-function combineReducers(reducers){
+function combineReducers(reducers) {
     // 返回一个总的reducer
-    return function combination (state={},action){
+    return function combination(state = {}, action) {
         let newState = {}
         let hasChange = false
-        for(let key in reducers){
-            newState[key]=reducers[key](state[key],action)
+        for (let key in reducers) {
+            newState[key] = reducers[key](state[key], action)
             // 判断是否有变化的
-            hasChange =hasChange || newState[key] !==state[key]
+            hasChange = hasChange || newState[key] !== state[key]
         }
         // 判断reducer是否有变化
-        hasChange = hasChange || reducers.length!==Object.keys(newState).length
+        hasChange = hasChange || reducers.length !== Object.keys(newState).length
         return hasChange ? newState : state
     }
 }

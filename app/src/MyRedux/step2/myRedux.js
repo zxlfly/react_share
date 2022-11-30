@@ -25,9 +25,9 @@ function createStore(reducer, enhancer) {
     function subscribe(listener) {
         currentListeners.push(listener)
         // 返回取消订阅的方法
-        return ()=>{
+        return () => {
             const index = currentListeners.indexOf(listener)
-            currentListeners.splice(index,1)
+            currentListeners.splice(index, 1)
         }
     }
     dispatch({ type: '__$$init' })
@@ -50,12 +50,12 @@ function compose(...funs) {
 function applyMiddleware(...middlewares) {
     return createStore => reducer => {
         const store = createStore(reducer)
-        let dispatch =store.dispatch
+        let dispatch = store.dispatch
         const middlewareAPI = {
             getState: store.getState,
             // 写成函数，避免不同中间件之间相互干扰
-            // dispatch只和当前作用域相关，使用的是依次增强过的
-            dispatch: (action,...args) => dispatch(action,...args)
+            // dispatch只和当前作用域相关，防止不同中间件相互干扰
+            dispatch: (action, ...args) => dispatch(action, ...args)
         }
 
         const chain = middlewares.map(middleware => middleware(middlewareAPI));
