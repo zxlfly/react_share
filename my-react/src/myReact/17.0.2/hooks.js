@@ -1,4 +1,4 @@
-import {scheduleUpdateOnFiber} from "./ReactFiberWorkLoop";
+import { scheduleUpdateOnFiber } from "./ReactFiberWorkLoop";
 
 let currentlyRenderingFiber = null;
 let workInProgressHook = null;
@@ -27,7 +27,7 @@ function updateWorkProgressHook() {
     }
   } else {
     // 初次渲染
-    hook = {memorizedState: null, next: null};
+    hook = { memorizedState: null, next: null };
     if (workInProgressHook) {
       // not head
       workInProgressHook = workInProgressHook.next = hook;
@@ -49,7 +49,7 @@ export function useReducer(reducer, initialState) {
 
     hook.memorizedState = initialState;
   }
-
+  // 这里没有像源码中bind，如果出现多个函数组件，可能存在fiber指向错误问题。
   const dispatch = (action) => {
     hook.memorizedState = reducer(hook.memorizedState, action);
     //从函数开始更新，也就是得拿到函数组件的fiber
